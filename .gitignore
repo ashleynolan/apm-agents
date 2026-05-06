@@ -1,0 +1,35 @@
+# OS or Editor folders
+.idea
+.DS_Store
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional eslint cache
+.eslintcache
+
+# Output of 'npm pack'
+*.tgz
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
+
+.vscode/*
+!.vscode/extensions.json
+
+# TypeScript
+compiled/
+
+# Yalc
+.yalc
+yalc.lock
+
+# Changeset peer dep range snapshot (temp file)
+.changeset/.peer-dep-ranges-snapshot.json

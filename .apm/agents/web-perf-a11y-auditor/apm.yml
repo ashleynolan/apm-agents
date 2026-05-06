@@ -1,0 +1,25 @@
+name: web-perf-a11y-auditor
+version: 1.0.0
+description: >-
+  Orchestrator agent for web performance and accessibility auditing.
+  Coordinates MCP tools (Chrome DevTools, a11y-mcp) and associated skills
+  to run Lighthouse audits, analyse Core Web Vitals, detect WCAG violations,
+  inspect network and rendering performance, and produce structured reports
+  with evidence and actionable remediation steps.
+target: all
+
+dependencies:
+  apm:
+    # This pulls in the entire plugin (MCP + Skills + auto-discovered .mcp.json)
+    - ChromeDevTools/chrome-devtools-mcp
+  mcp:
+    - name: a11y
+      registry: false
+      transport: stdio
+      command: npx
+      args: ["a11y-mcp"]
+    - name: chrome-devtools
+      registry: false
+      transport: stdio
+      command: npx
+      args: ["chrome-devtools-mcp@latest"]
