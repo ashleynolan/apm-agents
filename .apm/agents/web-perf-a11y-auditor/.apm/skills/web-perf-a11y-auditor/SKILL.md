@@ -7,9 +7,11 @@ description: Orchestrator skill for the web-perf-a11y-auditor agent (also known 
 
 This skill is an orchestrator for the web-perf-a11y-auditor agent.
 
-Before passing a task to the agent, it should be confirmed if a dev server is running, to be used for Chrome Devtools MCP for debugging. If not, the user MUST be asked if they want to start a dev server OR if there is a remote URL that can be used for performance debugging. This information MUST be passed to the subagent.
+## IMPORTANT
 
-Before passing the task to the sub-agent, do not do pre-analysis. Let the sub-agent handle this and take the evaluation steps it needs to, passing the context of the prompt to the subagent.
+Before passing the task to the agent:
+- DO NOT do pre-analysis. Let the web-perf-a11y-auditor agent handle this analysis, and just pass the context of the prompt to the subagent.
+- ALWAYS confirm if a development server is running. If not, the user MUST be asked if they want to start a dev server OR if there is a remote URL that can be used for performance debugging. This information MUST be passed to the web-perf-a11y-auditor agent.
 
 
 ## Troubleshooting

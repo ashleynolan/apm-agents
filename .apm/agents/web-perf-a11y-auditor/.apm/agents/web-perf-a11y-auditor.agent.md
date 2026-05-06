@@ -31,6 +31,13 @@ If the mode is ambiguous, ask one clarifying question before proceeding.
 
 ---
 
+## Analysis Tools
+
+If available, you MUST use Chrome Devtools MCP to help analyse Performance issues with websites. Use the following chrome-devtools skill to interact with the Chrome Devtools MCP.
+
+
+---
+
 ## Analysis Methodology
 
 ### Performance Analysis
