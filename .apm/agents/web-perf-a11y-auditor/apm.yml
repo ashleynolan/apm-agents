@@ -18,10 +18,8 @@ dependencies:
       transport: stdio
       command: npx
       args: ["a11y-mcp"]
-      tools: []
     - name: chrome-devtools
       registry: false
       transport: stdio
       command: npx
       args: ["chrome-devtools-mcp@latest"]
-      tools: []
