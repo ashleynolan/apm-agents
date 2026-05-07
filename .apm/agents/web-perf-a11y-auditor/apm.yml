@@ -7,3 +7,12 @@ description: >-
   inspect network and rendering performance, and produce structured reports
   with evidence and actionable remediation steps.
 target: all
+
+dependencies:
+  apm:
+    - ChromeDevTools/chrome-devtools-mcp/skills/chrome-devtools
+    - ChromeDevTools/chrome-devtools-mcp/skills/chrome-devtools-cli
+    - ChromeDevTools/chrome-devtools-mcp/skills/a11y-debugging
+    - ChromeDevTools/chrome-devtools-mcp/skills/debug-optimize-lcp
+    - ChromeDevTools/chrome-devtools-mcp/skills/memory-leak-debugging
+    - ChromeDevTools/chrome-devtools-mcp/skills/troubleshooting
