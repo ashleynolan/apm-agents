@@ -7,19 +7,3 @@ description: >-
   inspect network and rendering performance, and produce structured reports
   with evidence and actionable remediation steps.
 target: all
-
-dependencies:
-  apm:
-    # This pulls in the entire plugin (MCP + Skills + auto-discovered .mcp.json)
-    - ChromeDevTools/chrome-devtools-mcp
-  mcp:
-    - name: a11y
-      registry: false
-      transport: stdio
-      command: npx
-      args: ["a11y-mcp"]
-    - name: chrome-devtools
-      registry: false
-      transport: stdio
-      command: npx
-      args: ["chrome-devtools-mcp@latest"]
