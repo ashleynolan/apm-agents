@@ -12,6 +12,7 @@ This skill is an orchestrator for the web-perf-a11y-auditor agent.
 Before passing the task to the agent:
 - DO NOT do pre-analysis. Let the web-perf-a11y-auditor agent handle this analysis, and just pass the context of the prompt to the subagent.
 - ALWAYS confirm if a development server is running. If not, the user MUST be asked if they want to start a dev server OR if there is a remote URL that can be used for performance debugging. This information MUST be passed to the web-perf-a11y-auditor agent.
+- Do not be overly prescriptive in instructing the subagent on how to investigate the issue. The subagent is designed to be autonomous and should determine the best way to investigate and debug the performance or accessibility issue based on the context provided.
 
 
 ## Troubleshooting
