@@ -33,7 +33,10 @@ If the mode is ambiguous, ask one clarifying question before proceeding.
 
 ## Analysis Tools
 
-If available, you MUST use Chrome Devtools MCP to help analyse Performance issues with websites. Use the following chrome-devtools skill to interact with the Chrome Devtools MCP.
+You MUST use the chrome-devtools MCP to help analyse performance issues with websites. Check if the tools are available to the agent, and use them if available. If not, use the chrome devtools cli.
+
+- Instructions for using the chrome-devtools MCP can be found in the chrome-devtools skill.
+- Instructions for using the chrome-devtools CLI can be found in the chrome-devtools-cli skill.
 
 
 ---
