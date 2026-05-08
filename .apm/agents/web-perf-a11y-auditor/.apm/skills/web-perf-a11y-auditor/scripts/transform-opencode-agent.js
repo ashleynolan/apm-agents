@@ -28,98 +28,126 @@ const COLOR_MAP = {
 };
 
 const MODEL_MAP = {
-  sonnet: "anthropic/claude-sonnet-4-20250514",
-  opus: "anthropic/claude-opus-4-20250514",
-  haiku: "anthropic/claude-haiku-4-20250514",
+  sonnet: "github-copilot/claude-sonnet-4.6",
+  opus: "github-copilot/claude-opus-4.6",
+  haiku: "github-copilot/claude-haiku-4.6",
 };
+
+function extractMcpServerNames(lines) {
+  const names = [];
+  let inMcpBlock = false;
+  for (const line of lines) {
+    if (line.match(/^mcpServers:/)) {
+      inMcpBlock = true;
+      continue;
+    }
+    if (inMcpBlock) {
+      if (line !== "" && !line.startsWith(" ")) {
+        break;
+      }
+      const match = line.match(/^  - ([a-zA-Z][a-zA-Z0-9-]*):/);
+      if (match) {
+        names.push(match[1]);
+      }
+    }
+  }
+  return names;
+}
+
+function extractMcpServersFromTools(toolsLine) {
+  const names = [];
+  const seen = new Set();
+  const re = /mcp__([a-zA-Z][a-zA-Z0-9-]*)__/g;
+  let m;
+  while ((m = re.exec(toolsLine)) !== null) {
+    if (!seen.has(m[1])) {
+      seen.add(m[1]);
+      names.push(m[1]);
+    }
+  }
+  return names;
+}
 
 function transformFrontmatter(frontmatter) {
   const lines = frontmatter.split("\n");
-  const output = [];
+  const mcpBlockNames = extractMcpServerNames(lines);
+  const fields = {};
   let i = 0;
 
+  // First pass: collect all fields
   while (i < lines.length) {
     const line = lines[i];
 
-    // Transform tools → permission
-    if (line.match(/^tools:/)) {
-      output.push("permission:");
-      output.push("  edit: allow");
-      output.push("  bash: allow");
-      output.push("  read: allow");
-      output.push("  glob: allow");
-      output.push("  grep: allow");
-      output.push("  list: allow");
-      output.push("  task: allow");
-      output.push("  webfetch: allow");
-      output.push("  websearch: allow");
-      output.push("  skill: allow");
-      i++;
-      continue;
+    if (line.match(/^name:/)) { i++; continue; }
+
+    if (line.match(/^description:/)) {
+      fields.description = line.replace(/\\\\n\\\\n<example>[\s\S]*"$/, '"');
+      i++; continue;
     }
 
-    // Transform color
+    if (line.match(/^tools:/)) {
+      // Extract MCP server names from tools for ordering
+      fields.toolsMcpServers = extractMcpServersFromTools(line);
+      i++; continue;
+    }
+
     const colorMatch = line.match(/^color:\s*(.+)/);
     if (colorMatch) {
       const color = colorMatch[1].trim();
-      const mapped = COLOR_MAP[color] || color;
-      output.push(`color: ${mapped}`);
-      i++;
-      continue;
+      fields.color = COLOR_MAP[color] || color;
+      i++; continue;
     }
 
-    // Transform model alias
     const modelMatch = line.match(/^model:\s*(.+)/);
     if (modelMatch) {
       const model = modelMatch[1].trim();
-      const mapped = MODEL_MAP[model] || model;
-      output.push(`model: ${mapped}`);
-      i++;
-      continue;
+      fields.model = MODEL_MAP[model] || model;
+      i++; continue;
     }
 
-    // Remove memory field
-    if (line.match(/^memory:/)) {
-      i++;
-      continue;
-    }
+    if (line.match(/^memory:/)) { i++; continue; }
 
-    // Transform mcpServers array → map
     if (line.match(/^mcpServers:/)) {
-      output.push(line);
       i++;
-
       while (i < lines.length) {
         const mcpLine = lines[i];
-
-        // End of mcpServers block (non-indented, non-empty line)
-        if (mcpLine !== "" && !mcpLine.startsWith(" ")) {
-          break;
-        }
-
-        // "  - server-name:" → "  server-name:"
-        const arrayItemMatch = mcpLine.match(/^  - ([a-zA-Z].*)$/);
-        if (arrayItemMatch) {
-          output.push(`  ${arrayItemMatch[1]}`);
-          i++;
-          continue;
-        }
-
-        // "      key: val" (6 spaces) → "    key: val" (4 spaces)
-        if (mcpLine.startsWith("      ")) {
-          output.push(`    ${mcpLine.slice(6)}`);
-          i++;
-          continue;
-        }
-
-        output.push(mcpLine);
+        if (mcpLine !== "" && !mcpLine.startsWith(" ")) break;
         i++;
       }
       continue;
     }
 
-    output.push(line);
     i++;
+  }
+
+  // Merge MCP server names: tools order first, then any extras from mcpServers block
+  const toolsServers = fields.toolsMcpServers || [];
+  const seen = new Set(toolsServers);
+  const allMcpServers = [...toolsServers];
+  for (const name of mcpBlockNames) {
+    if (!seen.has(name)) {
+      allMcpServers.push(name);
+    }
+  }
+
+  // Second pass: output in desired order
+  const output = [];
+  if (fields.description) output.push(fields.description);
+  output.push("mode: subagent");
+  if (fields.model) output.push(`model: ${fields.model}`);
+  if (fields.color) output.push(`color: ${fields.color}`);
+  output.push("permission:");
+  output.push("  read: allow");
+  output.push("  edit: deny");
+  output.push("  bash: allow");
+  output.push("  glob: allow");
+  output.push("  grep: allow");
+  output.push("  list: allow");
+  output.push("  webfetch: allow");
+  output.push("  websearch: allow");
+  output.push("  skill: allow");
+  for (const name of allMcpServers) {
+    output.push(`  ${name}_*: allow`);
   }
 
   return output.join("\n");
