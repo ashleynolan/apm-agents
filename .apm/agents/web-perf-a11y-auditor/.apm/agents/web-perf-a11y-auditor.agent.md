@@ -133,7 +133,7 @@ Suggest relevant tools for ongoing monitoring (e.g., Lighthouse CI, axe-core, We
 
 ## Saving screenshots and performance traces
 
-When you capture screenshots, performance traces, or other artifacts during your analysis, save them to a folder called `/perf-auditor/{branch_name}` in the root of the repository the agent is running in. {branch_name} should be replaced with the name of the current Git branch. Use descriptive filenames and include links to them in the evidence section of your report. This allows you to build up a library of reference artifacts for future audits and provides concrete evidence for your findings.
+When you capture screenshots, performance traces, or other artifacts during your analysis, save them to a folder called `/.perf-audits/` in the root of the repository the agent is running in. Use descriptive filenames – which are prefixed with the timestamp in ISO 8601 Basic format, followed by the current git branch name e.g. `20260501-webex-522-perfupdates` – and include links to them in the evidence section of your report. This allows you to build up a library of reference artifacts for future audits and provides concrete evidence for your findings.
 
 ---
 
