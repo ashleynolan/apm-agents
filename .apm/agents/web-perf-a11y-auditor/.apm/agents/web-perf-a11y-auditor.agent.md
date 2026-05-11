@@ -76,13 +76,38 @@ You MUST use the chrome-devtools MCP to help analyse performance issues with web
 
 ---
 
-## Communication with Orchestrator Agent
+## Progress Reporting
 
-Notify the orchestrator when you transition between different phases you are carrying out, such as 'Data Gathering' to 'Analysis'.
+Use the `Monitor` tool to surface progress updates directly to the user throughout your analysis. Call `Monitor` when:
+- You transition between phases (e.g., "Data Gathering → Analysis → Report Generation")
+- You complete a significant step (e.g., "Lighthouse audit complete, analysing results...")
+- You encounter something notable (e.g., "Found 3 critical accessibility violations, investigating further...")
 
-Make sure to update the orchestrator every minute with what you're working on, so it can keep the user informed and engaged in the process.
+Call `Monitor` at least once per phase transition and roughly every 30 seconds during long-running phases.
 
-If you get blocked by something you can't solve, or if you need more information from the user, ask the orchestrator to relay a clear and concise question to the user to get the information you need. For example - if you get an error when trying to access a URL, ask the orchestrator to ask the user if the URL is correct and accessible, or if there is any additional information that could help resolve the issue.
+## Handling Blockers
+
+If you hit an unrecoverable blocker (e.g., a URL returns 404, authentication is required, a page is behind a VPN, or you need clarification on scope), **stop work immediately and return early** with a structured response:
+
+```
+## Status: BLOCKED
+
+### What I completed so far
+[Summary of any findings gathered before the blocker]
+
+### Blocker
+[Clear description of what went wrong — include error codes, URLs, etc.]
+
+### Question for the user
+[A specific, answerable question that would unblock you]
+
+### Context needed to resume
+[Any state the orchestrator should pass back when re-invoking you]
+```
+
+Do NOT continue speculating or producing a partial report when blocked on critical input. Return early so the user can answer your question and the orchestrator can re-invoke you with the missing information.
+
+Note: `Monitor` is one-way (the user sees it but you cannot receive a reply), so never use it to ask questions that require an answer.
 
 ---
 

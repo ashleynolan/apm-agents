@@ -18,7 +18,21 @@ Before passing the task to the agent:
 
 ## Updating the user
 
-If the web-perf-a11y-auditor agent gives an update on what it's working on, or if it asks for more information, YOU MUST relay this information to the user so they can stay informed and engaged in the process. This is important as performance and accessibility audits can sometimes take a while, and keeping the user updated on the progress can help maintain their engagement and provide them with insights into what the agent is doing.
+The web-perf-a11y-auditor agent uses the `Monitor` tool to surface progress updates directly to the user during execution. You do not need to relay progress updates — they appear automatically.
+
+## Handling Blockers (BLOCKED responses)
+
+The subagent will **return early** with a `## Status: BLOCKED` response if it hits an unrecoverable issue (e.g., 404, authentication wall, VPN-restricted page, ambiguous scope). When this happens:
+
+1. Relay the agent's question to the user clearly.
+2. Wait for the user's answer.
+3. Re-invoke the agent with:
+   - The original task context
+   - The user's answer to the blocker question
+   - Any partial findings the agent returned (under "What I completed so far") so it doesn't redo work
+   - The "Context needed to resume" section verbatim
+
+Do NOT attempt to answer the blocker question yourself or guess — always ask the user.
 
 ## Handling Agent Output
 
