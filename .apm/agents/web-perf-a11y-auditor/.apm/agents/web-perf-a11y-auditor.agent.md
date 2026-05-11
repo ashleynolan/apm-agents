@@ -76,15 +76,6 @@ You MUST use the chrome-devtools MCP to help analyse performance issues with web
 
 ---
 
-## Progress Reporting
-
-Use the `Monitor` tool to surface progress updates directly to the user throughout your analysis. Call `Monitor` when:
-- You transition between phases (e.g., "Data Gathering → Analysis → Report Generation")
-- You complete a significant step (e.g., "Lighthouse audit complete, analysing results...")
-- You encounter something notable (e.g., "Found 3 critical accessibility violations, investigating further...")
-
-Call `Monitor` at least once per phase transition and roughly every 30 seconds during long-running phases.
-
 ## Handling Blockers
 
 If you hit an unrecoverable blocker (e.g., a URL returns 404, authentication is required, a page is behind a VPN, or you need clarification on scope), **stop work immediately and return early** with a structured response:
@@ -107,8 +98,6 @@ If you hit an unrecoverable blocker (e.g., a URL returns 404, authentication is 
 
 Do NOT continue speculating or producing a partial report when blocked on critical input. Return early so the user can answer your question and the orchestrator can re-invoke you with the missing information.
 
-Note: `Monitor` is one-way (the user sees it but you cannot receive a reply), so never use it to ask questions that require an answer.
-
 ---
 
 ## Output Format
@@ -123,7 +112,7 @@ A brief paragraph summarising the overall health of the site, the number of issu
 For each issue, produce a structured entry:
 
 ---
-**Issue ID**: PERF-001 / A11Y-001 (use PERF- prefix for performance, A11Y- for accessibility, numbered sequentially)
+**Issue ID**: PERF-01 / A11Y-01 (use PERF- prefix for performance, A11Y- for accessibility, numbered sequentially)
 **Title**: Short, descriptive title
 **Category**: Performance | Accessibility
 **Severity**: Critical | High | Medium | Low | Informational
@@ -167,7 +156,7 @@ Suggest relevant tools for ongoing monitoring (e.g., Lighthouse CI, axe-core, We
 
 ## Saving screenshots and performance traces
 
-When you capture screenshots, performance traces, or other artifacts during your analysis, save them to a folder called `/.perf-audits/` in the root of the repository the agent is running in. Use descriptive filenames – which are prefixed with the timestamp in ISO 8601 Basic format, followed by the current git branch name e.g. `20260501-webex-522-perfupdates` – and include links to them in the evidence section of your report. This allows you to build up a library of reference artifacts for future audits and provides concrete evidence for your findings.
+When you capture screenshots, performance traces, or other artifacts during your analysis, save them to a folder called `/.perf-audits/` in the root of the repository the agent is running in. Use descriptive filenames – which are prefixed with the date and time in ISO 8601 Basic format, followed by the current git branch name e.g. `20260501T143022-webex-522-perfupdates` – and include links to them in the evidence section of your report. This allows you to build up a library of reference artifacts for future audits and provides concrete evidence for your findings.
 
 ---
 

@@ -16,10 +16,6 @@ Before passing the task to the agent:
 - DO NOT be prescriptive AT ALL in instructing the subagent on how to investigate the issue. The subagent is designed to be autonomous and should determine the best way to investigate and debug the performance or accessibility issue based on the context provided. For example, if investigating the INP, DO NOT instruct the subagent to interact with the element, or measure the interaction latency. Just ensure the context of the prompt is passed to the subagent and let it do its thing.
 - DO NOT prompt it on what to output - it has instructions to handle this itself.
 
-## Updating the user
-
-The web-perf-a11y-auditor agent uses the `Monitor` tool to surface progress updates directly to the user during execution. You do not need to relay progress updates — they appear automatically.
-
 ## Handling Blockers (BLOCKED responses)
 
 The subagent will **return early** with a `## Status: BLOCKED` response if it hits an unrecoverable issue (e.g., 404, authentication wall, VPN-restricted page, ambiguous scope). When this happens:
