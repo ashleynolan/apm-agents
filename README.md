@@ -51,7 +51,7 @@ Usefully, OpenCode agent definition format is different to those used by other a
 
 To use the agent with OpenCode, you will need to run the transformation script which can be found at `skills/web-perf-a11y-auditor/scripts/transform-opencode-agent.js`.
 
-As OpenCode also cannot gate MCP config to a subagent (yet), you will also need to ensure that you add the following config to setup the `Chrome Devtools` and `a11y-mcp` MCP servers to your `opencode.json` config file:
+As OpenCode doesn't support Subagent isolation of MCP servers (yet), you will also need to ensure that you add the following config to setup the `Chrome Devtools` and `a11y-mcp` MCP servers to your `opencode.json` config file:
 
 ```json
 {
@@ -71,11 +71,35 @@ As OpenCode also cannot gate MCP config to a subagent (yet), you will also need 
 }
 ```
 
+N.b. It's worth making sure you only enable these MCP servers when using them, as adding this in your global OpenCode config will add the MCP tools to your global context window for all conversations otherwise.
+
 ### Usage with Kiro
 
 I have no idea yet what Kiro support for subagents is. APM have an open feature request to support Kiro, so hopefully this will be solved once that feature is implemented.
 
 In the meantime, if anyone would like to help create a script for Kiro support, please let me know!
+
+
+### Prompting the web-perf-a11y-auditor subagent
+
+Once installed, the subagent can be prompted by writing terms such as the following:
+
+
+```
+# General performance audit
+❯ Use the performance agent to do an audit of {url_to_test}
+
+# Specifically look into performance of INP (or other metrics/core vitals)
+❯ Use the perf subagent to analyse the INP of {element_to_query}
+
+# Lighthouse audit
+❯ Run a lighthouse audit on {url_to_test} using the perf agent
+
+# General a11y audit
+❯ Use the a11y agent to run an a11y audit on {url_to_test}
+
+# Direct call to the agent
+❯ /web-perf-a11y-agent Do a performance audit of {url_to_test}
 
 
 ## Structure
