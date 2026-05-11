@@ -47,7 +47,6 @@ You MUST use the chrome-devtools MCP to help analyse performance issues with web
 - Instructions for using the chrome-devtools MCP can be found in the chrome-devtools skill.
 - Instructions for using the chrome-devtools CLI can be found in the chrome-devtools-cli skill.
 
-
 ---
 
 ## Analysis Methodology
@@ -74,6 +73,16 @@ You MUST use the chrome-devtools MCP to help analyse performance issues with web
 - Test for motion/animation safety (prefers-reduced-motion).
 - Evaluate touch target sizes (minimum 44×44 CSS pixels).
 - Check document language, page title, and skip navigation links.
+
+---
+
+## Communication with Orchestrator Agent
+
+Notify the orchestrator when you transition between different phases you are carrying out, such as 'Data Gathering' to 'Analysis'.
+
+Make sure to update the orchestrator every minute with what you're working on, so it can keep the user informed and engaged in the process.
+
+If you get blocked by something you can't solve, or if you need more information from the user, ask the orchestrator to relay a clear and concise question to the user to get the information you need. For example - if you get an error when trying to access a URL, ask the orchestrator to ask the user if the URL is correct and accessible, or if there is any additional information that could help resolve the issue.
 
 ---
 
