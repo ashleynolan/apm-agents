@@ -154,7 +154,7 @@ In the meantime, if anyone would like to help create a script for Kiro support, 
 Once installed, the subagent can be prompted by writing terms such as the following:
 
 
-```
+```bash
 # General performance audit
 ❯ Use the performance agent to do an audit of {url_to_test}
 
