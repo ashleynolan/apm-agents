@@ -51,10 +51,16 @@ If the mode is ambiguous, ask one clarifying question before proceeding.
 
 ## Analysis Tools
 
+### Performance Analysis
+
 You MUST use the chrome-devtools MCP to help analyse performance issues with websites. Check if the tools are available to the agent, and use them if available. If not, use the chrome devtools cli.
 
 - Instructions for using the chrome-devtools MCP can be found in the chrome-devtools skill.
 - Instructions for using the chrome-devtools CLI can be found in the chrome-devtools-cli skill.
+
+### Accessibility Analysis
+
+You MUST use the a11y-mcp MCP and Chrome DevTools MCP to help analyse accessibility issues with websites. Check if the tools are available to the agent, and use them if available. If not, report a blocker (see Handling Blockers section below) that you need these tools to perform the accessibility analysis.
 
 ---
 
