@@ -2,6 +2,19 @@
 
 A collection of agent packages defined using the APM (Agent Package Manager) format.
 
+## Table of Contents
+
+- [Installation](#installation)
+  - [Installing APM](#installing-apm)
+  - [Installing an APM Agent Package (A General Guide)](#installing-an-apm-agent-package-a-general-guide)
+- [`web-perf-a11y-auditor` Subagent](#web-perf-a11y-auditor-subagent)
+  - [Installation](#installation-1)
+  - [Usage with OpenCode](#usage-with-opencode)
+  - [Usage with Kiro](#usage-with-kiro)
+  - [Prompting the web-perf-a11y-auditor subagent](#prompting-the-web-perf-a11y-auditor-subagent)
+- [Structure](#structure)
+- [License](#license)
+
 ## Installation
 
 ### Installing APM
@@ -10,17 +23,17 @@ To install an agent package from this repo, you'll need to install APM on your m
 
 You can do this by following the [official documentation on the APM website](https://microsoft.github.io/apm/getting-started/installation/).
 
-### Installing an APM Agent Package
+### Installing an APM Agent Package (A General Guide)
 
-Once you have APM installed you can then install an Agent from this repo.
+Once you have APM installed you can then install an Agent from this repo. Here is a general APM installation guide – specific agent installation instructions can be found later in the README.
 
-To do this, you run the following command:
+To install an APM package, you can run the following command:
 
 `apm install {agent_package_path}`
 
 By default, agents are installed **local to the project you run this command from**, but you can choose to install these agents **globally** (so that it's available in all projects on your machine) via the `-g` flag:
 
-```
+```bash
 # global install
 apm install {agent_package_path} -g
 
@@ -28,22 +41,41 @@ apm install {agent_package_path} -g
 apm install {agent_package_path}
 ```
 
-Specific agent installation instructions can be found below.
+When installing an APM package, you can either let the install command auto-detect your agent-harness (or harnesses) – which will happen by default based on the folders it detects, such as `.claude/` or `./opencode` – or you can add `--target {harness_id}` to target a particular Agent harness. Currently, APM supports `claude`, `copilot`, `cursor`, `codex`, `gemini`, `opencode` and `windsurf` as potential targets.
 
+E.g.
 
-## web-perf-a11y-auditor Subagent
+```bash
+# Install APM package, targetting Claude
+apm install {agent_package_path} --target claude
+```
+
+---
+
+## `web-perf-a11y-auditor` Subagent
 
 ### Installation
 
-To install the **Performance and A11y Auditor Agent**, globally on your machine, run the following commands:
+Like any APM package, you can choose to install them **locally** to the project you are working in or **globally** to your user config (so that it's available in all projects on your machine) via the `-g` flag:
+
+To install the **Performance and A11y Auditor Agent**, run the following commands in your terminal:
 
 ```bash
+# ===== GLOBAL INSTALL ======
 # First install the agent
 apm install -g ashleynolan/apm-agents/.apm/agents/web-perf-a11y-auditor
 
 # …and then once that has finished run the following to ensure any transitive skills are also installed
 apm install
+
+
+# ===== LOCAL INSTALL ======
+# First install the agent
+apm install ashleynolan/apm-agents/.apm/agents/web-perf-a11y-auditor
+# …and then once that has finished run the following to ensure any transitive skills are also installed
+apm install
 ```
+
 
 ### Usage with OpenCode
 
@@ -114,6 +146,7 @@ Once installed, the subagent can be prompted by writing terms such as the follow
 # Direct call to the agent
 ❯ /web-perf-a11y-agent Do a performance audit of {url_to_test}
 
+---
 
 ## Structure
 
