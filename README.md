@@ -169,6 +169,7 @@ Once installed, the subagent can be prompted by writing terms such as the follow
 
 # Direct call to the agent
 ❯ /web-perf-a11y-agent Do a performance audit of {url_to_test}
+```
 
 ---
 
