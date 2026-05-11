@@ -8,7 +8,7 @@ A collection of agent packages defined using the APM (Agent Package Manager) for
 
 To install an agent package from this repo, you'll need to install APM on your machine.
 
-You can do this by following the [official documentation on the APM website](https://microsoft.github.io/apm/getting-started/installation/))
+You can do this by following the [official documentation on the APM website](https://microsoft.github.io/apm/getting-started/installation/).
 
 ### Installing an APM Agent Package
 

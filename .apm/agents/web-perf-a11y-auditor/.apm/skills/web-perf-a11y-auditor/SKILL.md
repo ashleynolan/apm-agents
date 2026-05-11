@@ -16,6 +16,12 @@ Before passing the task to the agent:
 - DO NOT be prescriptive AT ALL in instructing the subagent on how to investigate the issue. The subagent is designed to be autonomous and should determine the best way to investigate and debug the performance or accessibility issue based on the context provided. For example, if investigating the INP, DO NOT instruct the subagent to interact with the element, or measure the interaction latency. Just ensure the context of the prompt is passed to the subagent and let it do its thing.
 - DO NOT prompt it on what to output - it has instructions to handle this itself.
 
+## Handling Agent Output
+
+When the agent returns its findings, ensure you format the output in a clear and concise manner, summarising the key issues found, their severity, and the evidence supporting these findings. If the agent has provided specific recommendations for improving performance or accessibility, highlight these in a separate section.
+
+Make a task list for the user of next steps to take based on the output, and ask the user which of those steps they'd like you to help with.
+
 ## Troubleshooting
 
 If there are errors launching `web-perf-a11y-auditor`, refer to https://github.com/ashleynolan/apm-agents, passing this guidance to the user.
