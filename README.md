@@ -63,7 +63,16 @@ As OpenCode doesn't support Subagent isolation of MCP servers (yet), you will al
   "mcp": {
     "chrome-devtools": {
       "type": "local",
-      "command": ["npx", "chrome-devtools-mcp@latest"],
+      "command": [
+        "npx", "chrome-devtools-mcp@latest",
+        "--isolated=true",
+        "--headless=false",
+        "--no-usage-statistics",
+        "--no-performance-crux",
+        "--chromeArg=--deny-permission-prompts",
+        "--chromeArg=--use-fake-ui-for-media-stream",
+        "--chromeArg=--disable-notifications"
+      ],
       "enabled": true
     },
     "a11y": {
