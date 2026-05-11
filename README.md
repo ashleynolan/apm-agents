@@ -39,7 +39,7 @@ To install the **Performance and A11y Auditor Agent**, globally on your machine,
 
 ```bash
 # First install the agent
-apm install -g justeattakeaway/pie/.apm/agents/web-perf-a11y-auditor
+apm install -g ashleynolan/apm-agents/.apm/agents/web-perf-a11y-auditor
 
 # …and then once that has finished run the following to ensure any transitive skills are also installed
 apm install
@@ -50,6 +50,10 @@ apm install
 Usefully, OpenCode agent definition format is different to those used by other agent harnesses like Claude or Copilot. YML settings like `mcpServers` and `color` will cause errors when trying to load the agent straight from an `apm install`.
 
 To use the agent with OpenCode, you will need to run the transformation script which can be found at `skills/web-perf-a11y-auditor/scripts/transform-opencode-agent.js`.
+
+```
+ node ./agents/skills/scripts/transform-opencode-agent.js <path-to-agent.md>
+```
 
 As OpenCode doesn't support Subagent isolation of MCP servers (yet), you will also need to ensure that you add the following config to setup the `Chrome Devtools` and `a11y-mcp` MCP servers to your `opencode.json` config file:
 
