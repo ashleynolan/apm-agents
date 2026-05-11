@@ -7,10 +7,11 @@ A collection of agent packages defined using the APM (Agent Package Manager) for
 - [Installation](#installation)
   - [Installing APM](#installing-apm)
   - [Installing an APM Agent Package (A General Guide)](#installing-an-apm-agent-package-a-general-guide)
-- [`web-perf-a11y-auditor` Subagent](#web-perf-a11y-auditor-subagent)
+- [Using agents across different harnesses](#using-agents-across-different-harnesses)
+- [`web-perf-a11y-auditor` Agent](#web-perf-a11y-auditor-agent)
   - [Installation](#installation-1)
-  - [Usage with OpenCode](#usage-with-opencode)
-  - [Usage with Kiro](#usage-with-kiro)
+    - [Usage with OpenCode](#usage-with-opencode)
+    - [Usage with Kiro](#usage-with-kiro)
   - [Prompting the web-perf-a11y-auditor subagent](#prompting-the-web-perf-a11y-auditor-subagent)
 - [Structure](#structure)
 - [License](#license)
@@ -52,11 +53,33 @@ apm install {agent_package_path} --target claude
 
 ---
 
-## `web-perf-a11y-auditor` Subagent
+## Using agents across different harnesses
+
+APM aims to enable the sharing of Agents, Skills, MCPs, and Slash Commands to any Agent Harness.
+
+Currently, APM supports:
+
+- Claude
+- Copilot
+- Cursor
+- Codex
+- Gemini
+- Opencode
+- Windsurf
+
+Although it does it's best to support these harnesses, there are sometimes slight differences that it can't handle – a good example is Agent Configuration YML, which is defined slightly differently in OpenCode to Copilot and Claude.
+
+Where relevant, the Agent installation instructions will detail any extra steps needed for these harnesses.
+
+THe APM packages in this repo support Claude, Copilot and Opencode – they haven't been tested in the other tools, but would be happy to accept contributions to help support them!
+
+---
+
+## `web-perf-a11y-auditor` Agent
 
 ### Installation
 
-Like any APM package, you can choose to install them **locally** to the project you are working in or **globally** to your user config (so that it's available in all projects on your machine) via the `-g` flag:
+Like any APM package, you can choose to install this agent **locally** to the project you are working in or **globally** to your user config (so that it's available in all projects on your machine) via the `-g` flag:
 
 To install the **Performance and A11y Auditor Agent**, run the following commands in your terminal:
 
@@ -76,8 +99,9 @@ apm install ashleynolan/apm-agents/.apm/agents/web-perf-a11y-auditor
 apm install
 ```
 
+Once installed, you can now open your agent harness such as Claude, or Copilot and start prompting it to use the agent! (see [Prompting the web-perf-a11y-auditor subagent](#prompting-the-web-perf-a11y-auditor-subagent) for example prompts).
 
-### Usage with OpenCode
+#### Usage with OpenCode
 
 Usefully, OpenCode agent definition format is different to those used by other agent harnesses like Claude or Copilot. YML settings like `mcpServers` and `color` will cause errors when trying to load the agent straight from an `apm install`.
 
@@ -118,7 +142,7 @@ As OpenCode doesn't support Subagent isolation of MCP servers (yet), you will al
 
 N.b. It's worth making sure you only enable these MCP servers when using them, as adding this in your global OpenCode config will add the MCP tools to your global context window for all conversations otherwise.
 
-### Usage with Kiro
+#### Usage with Kiro
 
 I have no idea yet what Kiro support for subagents is. APM have an open feature request to support Kiro, so hopefully this will be solved once that feature is implemented.
 
