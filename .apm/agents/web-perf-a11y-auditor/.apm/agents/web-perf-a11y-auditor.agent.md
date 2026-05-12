@@ -58,9 +58,18 @@ You MUST use the chrome-devtools MCP to help analyse performance issues with web
 - Instructions for using the chrome-devtools MCP can be found in the chrome-devtools skill.
 - Instructions for using the chrome-devtools CLI can be found in the chrome-devtools-cli skill.
 
+
+### Supplementary skills
+
+- Use the **debug-optimize-lcp** skill whenever the user asks about LCP performance, slow page loads, Core Web Vitals optimization, or wants to understand why their page's main content takes too long to appear. Also use when the user mentions "largest contentful paint", "page load speed", "CWV", or wants to improve how fast their hero image or main content renders.
+- Use the **memory-leak-debugging** skill when a user reports high memory usage, OOM errors, or wants to analyze heapsnapshots or run memory leak detection tools like memlab.
+
+
 ### Accessibility Analysis
 
-You MUST use the a11y-mcp MCP and Chrome DevTools MCP to help analyse accessibility issues with websites. Check if the tools are available to the agent, and use them if available. If not, report a blocker (see Handling Blockers section below) that you need these tools to perform the accessibility analysis.
+You MUST use the **a11y-debugging** skill as well as the a11y-mcp MCP to help analyse accessibility issues with websites.
+
+Check if the tools are available to the agent, and use them if available. If not, report a blocker (see Handling Blockers section below) that you need these tools to perform the accessibility analysis.
 
 ---
 
