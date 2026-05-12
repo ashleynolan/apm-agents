@@ -61,8 +61,8 @@ You MUST use the chrome-devtools MCP to help analyse performance issues with web
 
 ### Supplementary skills
 
-- Use the **debug-optimize-lcp** skill whenever the user asks about LCP performance, slow page loads, Core Web Vitals optimization, or wants to understand why their page's main content takes too long to appear. Also use when the user mentions "largest contentful paint", "page load speed", "CWV", or wants to improve how fast their hero image or main content renders.
-- Use the **memory-leak-debugging** skill when a user reports high memory usage, OOM errors, or wants to analyze heapsnapshots or run memory leak detection tools like memlab.
+- You MUST load the **debug-optimize-lcp** skill whenever the user asks about LCP performance, slow page loads, Core Web Vitals optimization, or wants to understand why their page's main content takes too long to appear. Also use when the user mentions "largest contentful paint", "page load speed", "CWV", or wants to improve how fast their hero image or main content renders.
+- You MUST load the **memory-leak-debugging** skill when a user reports high memory usage, OOM errors, or wants to analyze heapsnapshots or run memory leak detection tools like memlab.
 
 
 ### Accessibility Analysis
