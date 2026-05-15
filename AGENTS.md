@@ -37,7 +37,7 @@ dependencies:
 ---
 name: "agent-name"
 description: "Used as the agent's description in the Claude Code Agent tool. Include examples with <example> blocks."
-tools: Tool1, Tool2, mcp__plugin_name__tool_name   # comma-separated list
+tools: Tool1, Tool2, mcp__<server-name>__<tool-name>   # comma-separated list
 model: sonnet   # or opus, haiku
 color: blue     # display colour
 memory: user    # memory scope (user, project, etc.)
@@ -54,6 +54,6 @@ The body after the frontmatter is the full system prompt for the agent.
 
 ## Conventions
 
-- MCP tools in the `tools` frontmatter use the format `mcp__plugin_<plugin-name>_<server-name>__<tool-name>`
+- MCP tools in the `tools` frontmatter use the format `mcp__<server-name>__<tool-name>`
 - The `target: all` field in `apm.yml` means the agent is available regardless of project context
 - Artifacts produced during agent runs (screenshots, traces) should be saved to a subfolder named after the current git branch within a dedicated directory in the repo root

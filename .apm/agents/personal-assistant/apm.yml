@@ -1,0 +1,8 @@
+name: personal-assistant
+version: 0.1.0
+description: >-
+  Orchestrator agent for JIRA and Confluence tasks.
+  Coordinates Atlassian MCP and associated skills
+  for administration tasks like creating tickets, editing tickets, searching JIRA,
+  making comments, updating labels, and producing reports.
+target: all
