@@ -79,7 +79,7 @@ Apply labels consistently. Always apply relevant labels from the following conve
 - Do not invent arbitrary labels — use existing conventions, or use TICKET_LABELS from the config file if provided.
 
 ### Priority
-Default to `Medium` unless context indicates otherwise (unless DEFAULT_PRIORITY is specified in the config file):
+Default to `Medium` unless context indicates otherwise (unless DEFAULT_TICKET_PRIORITY is specified in the config file):
 - `Highest` / `High`: production incidents, security issues, data loss
 - `Medium`: standard feature work, non-critical bugs
 - `Low`: minor enhancements, cosmetic issues

@@ -13,6 +13,10 @@ A collection of agent packages defined using the APM (Agent Package Manager) for
     - [Usage with OpenCode](#usage-with-opencode)
     - [Usage with Kiro](#usage-with-kiro)
   - [Prompting the web-perf-a11y-auditor subagent](#prompting-the-web-perf-a11y-auditor-subagent)
+- [`personal-assistant` Agent](#personal-assistant-agent)
+  - [Installation](#installation-2)
+  - [Configuration](#configuration)
+  - [Prompting the personal-assistant subagent](#prompting-the-personal-assistant-subagent)
 - [Structure](#structure)
 - [License](#license)
 
@@ -64,7 +68,7 @@ Currently, APM supports:
 - Cursor
 - Codex
 - Gemini
-- Opencode
+- OpenCode
 - Windsurf
 
 Although it does it's best to support these harnesses, there are sometimes slight differences that it can't handle – a good example is Agent Configuration YML, which is defined slightly differently in OpenCode to Copilot and Claude.
@@ -76,6 +80,10 @@ THe APM packages in this repo support Claude, Copilot and Opencode – they have
 ---
 
 ## `web-perf-a11y-auditor` Agent
+
+The `web-perf-a11y-auditor` Agent can be used to evaluate websites for performance bottlenecks and accessibility issues.
+
+It uses the Chrome Devtools MCP (and associated official Chrome Devtools Skills) to investigate specific metrics like LCP, CLS, and INP. It can also run more general performance or a11y audits, run Lighthouse audits, and evaluate sites with respect to WCAG 2.1 AA compliance.
 
 ### Installation
 
@@ -169,6 +177,70 @@ Once installed, the subagent can be prompted by writing terms such as the follow
 
 # Direct call to the agent
 ❯ /web-perf-a11y-agent Do a performance audit of {url_to_test}
+```
+
+---
+
+## `personal-assistant` Agent
+
+The `personal-assistant` Agent is an expert JIRA project manager and Confluence curator. It can create, edit, search, and report on JIRA tickets and Confluence pages via the Atlassian MCP.
+
+### Installation
+
+Like any APM package, you can choose to install this agent **locally** to the project you are working in or **globally** to your user config (so that it's available in all projects on your machine) via the `-g` flag:
+
+```bash
+# ===== GLOBAL INSTALL ======
+# First install the agent
+apm install -g ashleynolan/apm-agents/.apm/agents/personal-assistant
+
+# …and then once that has finished run the following to ensure any transitive skills are also installed
+apm install
+
+
+# ===== LOCAL INSTALL ======
+# First install the agent
+apm install ashleynolan/apm-agents/.apm/agents/personal-assistant
+# …and then once that has finished run the following to ensure any transitive skills are also installed
+apm install
+```
+
+### Configuration
+
+The agent optionally loads a config file from `~/.personal-assistant-config.md`. This file can contain:
+
+```
+JIRA_PROJECT_KEY=DEMO # so you don't have to specify it in every prompt
+JIRA_PROJECT_KEY=EXP
+DEFAULT_TICKET_TYPE=Story # Setting this overrides the `Story` default. Can be Story|Bug|Task|Epic|Sub-task|Spike)
+DEFAULT_TICKET_PRIORITY=Normal # overrides the `Normal` default. Can be Trivial|Minor|Normal|Major|Critical|Blocker
+TICKET_LABELS=label1,label2 # project-specific labels to apply consistently
+```
+
+If the file doesn't exist, the agent proceeds normally using defaults and information from your prompt.
+
+### Prompting the personal-assistant subagent
+
+Once installed, the subagent can be prompted by writing terms such as the following:
+
+```bash
+# Create a JIRA ticket
+❯ Create a JIRA ticket for adding dark mode support
+
+# Search JIRA
+❯ Show me all open tickets assigned to me in the current sprint
+
+# Create a Confluence page
+❯ Create a Confluence page in the DEMO space documenting our new authentication flow
+
+# Search Confluence
+❯ Search Confluence for any pages about our deployment process
+
+# Generate a report
+❯ Give me a sprint completion summary for DEMO
+
+# Direct call to the agent
+❯ /personal-assistant Create a bug ticket for the broken checkout flow on mobile
 ```
 
 ---
