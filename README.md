@@ -205,6 +205,30 @@ apm install ashleynolan/apm-agents/.apm/agents/personal-assistant
 apm install
 ```
 
+#### Usage with OpenCode
+
+Out of the box this subagent won't currently work with OpenCode. I am working on a script to help with this, but if you can't wait for that, you can get your own agent to transform the Agent YML in `/.apm/agents/personal-assistant/.apm/agents/personal-assistant.agent.md` into OpenCode format and it should take care of that for you.
+
+As OpenCode doesn't support Subagent isolation of MCP servers (yet), you will also need to ensure that you add the following config to setup the `Atlassian` MCP server to your `opencode.json` config file:
+
+```json
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "atlassian": {
+      "type": "http",
+      "url": "https://mcp.atlassian.com/v1/mcp",
+      "enabled": true
+    }
+  }
+}
+```
+
+### Authenticating the Atlassian MCP
+
+Once installed, you will need to authenticate the Atlassian MCP for your subagent to use. This is different per agent harness but it should provide you with authentication instructions (for example, in Claude, if you run `/mcp`, you will be able to authenticate it through the prompts displayed).
+
+
 ### Configuration
 
 The agent optionally loads a config file from `~/.personal-assistant-config.md`. This file can contain:
